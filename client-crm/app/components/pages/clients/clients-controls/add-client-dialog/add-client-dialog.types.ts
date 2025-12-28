@@ -1,0 +1,2 @@
+// Types for AddClientDialog component
+

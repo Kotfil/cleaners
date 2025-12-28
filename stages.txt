@@ -5,3 +5,5 @@ users
 roles
 
 step2.
+bot Telegram
+instagram > crm content + tiktok
