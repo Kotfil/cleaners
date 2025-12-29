@@ -9,16 +9,16 @@ export const metadata: Metadata = {
     default: "chronark.com",
     template: "%s | chronark.com",
   },
-  description: "Co-founder of unkey.dev and founder of planetfall.io",
+  description: "Клинеры.io",
   openGraph: {
-    title: "chronark.com",
+    title: "razo",
     description:
-      "Co-founder of unkey.dev and founder of planetfall.io",
-    url: "https://chronark.com",
-    siteName: "chronark.com",
+      "Hello Sanechka",
+    url: "https://url",
+    siteName: "Seeee",
     images: [
       {
-        url: "https://chronark.com/og.png",
+        url: "https://neatclean.com/blogs/news/non-toxic-cleaning-a-greener-safer-home-with-neats-powerfully-plant-based-solutions?srsltid=AfmBOoo5AExDflZLQYwxvbzDw1Z75u7MDD9KHf-b1EoRklZFer4LHKMahttps://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2023/09/cleaning-windows.jpeg-e1694410991244.jpg",
         width: 1920,
         height: 1080,
       },
