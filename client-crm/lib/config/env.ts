@@ -5,4 +5,5 @@ export const env = {
       ? process.env.NEXT_PUBLIC_API_URL_PROD 
       : process.env.NEXT_PUBLIC_API_URL_DEV ,
   nodeEnv: process.env.NODE_ENV || 'development',
+  recaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
 } as const;
