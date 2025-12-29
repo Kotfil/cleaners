@@ -270,24 +270,25 @@ const UserDrawerComponent: React.FC<UserDrawerProps> = ({ user, isOpen, onClose 
       }
 
       // Проверяем, что пользователь не пытается установить себе статус ARCHIVED
-      if (isCurrentUser && values.status === 'archived') {
-        toast.error('You cannot set your own status to ARCHIVED');
-        setSubmitting(false);
-        return;
-      }
+      // if (isCurrentUser && values.status === 'archived') {
+      //   toast.error('You cannot set your own status to ARCHIVED');
+      //   setSubmitting(false);
+      //   return;
+      // }
 
       // Проверяем изменение статуса с Suspended на Active - требуется пароль
-      const isRestoringFromSuspended = initialStatus === 'suspended' && values.status === 'active';
+      // const isRestoringFromSuspended = initialStatus === 'suspended' && values.status === 'active';
       
       // Если восстанавливаем из Suspended в Active и пароль не указан - ошибка
-      if (isRestoringFromSuspended && !values.password?.trim()) {
-        toast.error('Password is required when restoring user from suspended to active status');
-        setSubmitting(false);
-        return;
-      }
+      // if (isRestoringFromSuspended && !values.password?.trim()) {
+      //   toast.error('Password is required when restoring user from suspended to active status');
+      //   setSubmitting(false);
+      //   return;
+      // }
 
       // Автоматически определяем canSignIn на основе статуса
-      const canSignIn = values.status === 'active';
+      // const canSignIn = values.status === 'active';
+      const canSignIn = user.status === 'active';
 
       // Подготовка телефонов - очищаем форматирование перед отправкой
       const phones = values.phones && values.phones.length > 0
@@ -311,7 +312,7 @@ const UserDrawerComponent: React.FC<UserDrawerProps> = ({ user, isOpen, onClose 
         name: nameValue,
         roleId: primaryRoleId,
         secondaryRoleIds: secondaryRoleIds.length > 0 ? secondaryRoleIds : [], // Пустой массив для удаления всех secondary roles
-        status: values.status,
+        // status: values.status,
         canSignIn: canSignIn,
       };
       if (phones) payload.phones = phones;
@@ -327,13 +328,16 @@ const UserDrawerComponent: React.FC<UserDrawerProps> = ({ user, isOpen, onClose 
       // 2. Если восстанавливаем из Suspended в Active - пароль обязателен (уже проверили выше)
       // 3. Если статус Active и пароль не указан - не отправляем (оставляем старый)
       // 4. Если статус Suspended или Archived - пароль не нужен
-      if (values.status === 'active' && values.password?.trim()) {
+      // if (values.status === 'active' && values.password?.trim()) {
+      //   payload.password = values.password.trim();
+      // }
+      if (user.status === 'active' && values.password?.trim()) {
         payload.password = values.password.trim();
       }
 
       await dispatch(updateUser({ id: user.id, userData: payload })).unwrap();
       toast.success('User updated successfully');
-      setInitialStatus(values.status); // Обновляем начальное состояние
+      // setInitialStatus(values.status); // Обновляем начальное состояние
       setInternalOpen(false);
       // Очищаем предыдущий таймаут, если он существует
       if (closeTimeoutRef.current) {
@@ -441,7 +445,7 @@ const UserDrawerComponent: React.FC<UserDrawerProps> = ({ user, isOpen, onClose 
                       roles={roles}
                       selectedRoles={values.roles || []}
                       onRolesChange={(selectedRoles) => setFieldValue('roles', selectedRoles)}
-                      disabled={rolesLoading || values.status === 'archived'}
+                      disabled={rolesLoading || user.status === 'archived'}
                       placeholder="Select roles (at least one required)"
                       error={touched.roles && !!errors.roles}
                     />
@@ -449,7 +453,7 @@ const UserDrawerComponent: React.FC<UserDrawerProps> = ({ user, isOpen, onClose 
                       <FormikErrorMessageWrapper name="roles" />
                     </div>
                   </div>
-                  <div className="grid gap-2">
+                  {/* <div className="grid gap-2">
                     <Label htmlFor="status">Status *</Label>
                     <Select
                       value={values.status}
@@ -483,7 +487,7 @@ const UserDrawerComponent: React.FC<UserDrawerProps> = ({ user, isOpen, onClose 
                         </div>
                       )}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Address fields: Street address */}

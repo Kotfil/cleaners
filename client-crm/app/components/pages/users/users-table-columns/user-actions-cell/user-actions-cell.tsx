@@ -70,7 +70,7 @@ export const UserActionsCell: React.FC<UserActionsCellProps> = memo(({ user, onO
           <IconEdit className="h-4 w-4 text-muted-foreground" />
           <span className="sr-only">Edit user</span>
         </Button>
-        {!isCurrentUser && user.status !== 'archived' && (
+        {/* {!isCurrentUser && user.status !== 'archived' && (
           <Button
             variant="ghost"
             size="icon"
@@ -83,7 +83,7 @@ export const UserActionsCell: React.FC<UserActionsCellProps> = memo(({ user, onO
             <IconArchive className="h-4 w-4 text-muted-foreground" />
             <span className="sr-only">Archive user</span>
           </Button>
-        )}
+        )} */}
       </div>
       <Dialog open={isArchiveDialogOpen} onOpenChange={setIsArchiveDialogOpen}>
         <DialogContent>
