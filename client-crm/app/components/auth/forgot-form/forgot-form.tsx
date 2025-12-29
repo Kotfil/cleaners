@@ -33,12 +33,12 @@ export function ForgotForm({
         try {
             await dispatch(forgotPassword({email: values.email})).unwrap();
             // Show success toast
-            toast.success('Check your email, instructions for password recovery are there');
+            toast.success('Проверьте вашу почту, там инструкции по восстановлению пароля');
             // Redirect to login
             router.push('/login');
         } catch (error: any) {
             // unwrap() returns rejectWithValue directly as string
-            const errorMessage = typeof error === 'string' ? error : (error?.message || 'Failed to send reset email');
+            const errorMessage = typeof error === 'string' ? error : (error?.message || 'Не удалось отправить письмо для сброса');
             toast.error(errorMessage);
         }
     };
@@ -57,7 +57,7 @@ export function ForgotForm({
                              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-2 self-start"
                          >
                              <ArrowLeft className="h-4 w-4" />
-                             <span>Back to login</span>
+                             <span>Вернуться к входу</span>
                          </Link>
                          <ForgotFormTitle />
 

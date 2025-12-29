@@ -5,9 +5,9 @@ import { cn } from "@/helpers/utils";
 export function ForgotFormTitle({ className }: ForgotFormTitleProps) {
   return (
     <div className={cn("flex flex-col items-center gap-1 text-center", className)}>
-      <TypographyH2 className="text-2xl font-bold">Forgot your password?</TypographyH2>
+      <TypographyH2 className="text-2xl font-bold">Забыли пароль?</TypographyH2>
       <TypographyMuted className="text-balance">
-        Enter your email below to reset your password
+        Введите ваш email ниже для сброса пароля
       </TypographyMuted>
     </div>
   );

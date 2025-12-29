@@ -66,7 +66,7 @@ export class EmailService {
       let appUrl: string;
       if (nodeEnv === 'production') {
         // Production: use domain from COOKIE_DOMAIN
-        appUrl = cookieDomain ? `https://${cookieDomain}` : 'https://fl-alerter.icu';
+        appUrl = cookieDomain ? `https://${cookieDomain}` : 'https:/cleanersin.store';
       } else {
         // Development: use APP_URL or default localhost
         appUrl = this.configService.get<string>('APP_URL') || 'http://localhost:3000';
@@ -120,7 +120,7 @@ export class EmailService {
       let appUrl: string;
       if (nodeEnv === 'production') {
         // Production: use domain from COOKIE_DOMAIN
-        appUrl = cookieDomain ? `https://${cookieDomain}` : 'https://fl-alerter.icu';
+        appUrl = cookieDomain ? `https://${cookieDomain}` : 'https://cleanersin.store';
       } else {
         // Development: use APP_URL or default localhost
         appUrl = this.configService.get<string>('APP_URL') || 'http://localhost:3000';
@@ -248,10 +248,10 @@ export class EmailService {
       let portalUrl: string;
       if (nodeEnv === 'production') {
         // Production: use CLIENT_PORTAL_URL or default
-        portalUrl = clientPortalUrl || 'https://portal.jenyclean.com';
+        portalUrl = clientPortalUrl || 'https://clientportal.store';
       } else {
         // Development: use CLIENT_PORTAL_URL or default localhost
-        portalUrl = clientPortalUrl || 'http://localhost:3001';
+        portalUrl = clientPortalUrl || 'http://localhost:clientportal';
       }
       
       const fullInviteUrl = `${portalUrl}/sign-up?token=${inviteToken}`;

@@ -1,3 +1,22 @@
+// ⚠️ ВАЖНО: Загружаем .env ПЕРЕД импортом AppDataSource
+import * as dotenv from 'dotenv';
+import { resolve, join } from 'path';
+
+// Загружаем .env файл - пробуем несколько путей
+const envPaths = [
+  join(process.cwd(), '.env'),           // Корень проекта (server-crm/.env)
+  resolve(__dirname, '../../.env'),      // Относительно src/database/
+  resolve(__dirname, '../../../.env'),    // На уровень выше
+];
+
+for (const envPath of envPaths) {
+  const result = dotenv.config({ path: envPath });
+  if (!result.error) {
+    break;
+  }
+}
+
+// Теперь импортируем AppDataSource после загрузки .env
 import { DataSource } from 'typeorm';
 import { AppDataSource } from '../config/data-source';
 import { seedPermissions } from './seeds/permissions.seed';
@@ -5,9 +24,6 @@ import { seedRoles } from './seeds/roles.seed';
 import { seedAdminUsers } from './seeds/admin-users.seed';
 import { seedClients } from './seeds/clients.seed';
 import { seedSettings } from './seeds/settings.seed';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 /**
  * Run all seeds in correct order
@@ -56,7 +72,7 @@ async function runAllSeeds() {
       // 5. Seed mock clients (optional, for development)
       const shouldSeedClients = process.env.SEED_CLIENTS !== 'false';
       if (shouldSeedClients) {
-        const clientCount = parseInt(process.env.SEED_CLIENTS_COUNT || '50', 10);
+        const clientCount = parseInt(process.env.SEED_CLIENTS_COUNT || '1', 10);
         console.log(`🌱 Step 5/5: Seeding mock clients (${clientCount} clients)...\n`);
         await seedClients(dataSource, clientCount);
       } else {
@@ -74,9 +90,9 @@ async function runAllSeeds() {
       console.log('   ✅ Mock clients created');
     }
     console.log('\n💡 Admin users credentials:');
-    console.log('   - jc@crm.com / 111111');
-    console.log('   - vitaly@crm.com / 222222');
-    console.log('   - test2@test.test / 111111');
+    console.log('   - filippkotenko@outlook.com / 222222@A');
+    console.log('   - syslik@gmail.com / 222222@A');
+    console.log('   - sanechka@gmail.com / 222222@A');
     
     process.exit(0);
   } catch (error) {

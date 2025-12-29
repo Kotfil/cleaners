@@ -23,7 +23,7 @@ export default function OrdersPage() {
           <div className="@container/main flex flex-1 flex-col gap-2">
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
               <div className="px-4 lg:px-6">
-                <TypographyH1 className="text-2xl font-bold text-left">Orders</TypographyH1>
+                <TypographyH1 className="text-2xl font-bold text-left">Заказы</TypographyH1>
                 <TypographyMuted>Orders management coming soon...</TypographyMuted>
               </div>
             </div>

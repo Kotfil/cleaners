@@ -10,10 +10,10 @@ export function ResetPasswordFormButton({ isLoading }: ResetPasswordFormButtonPr
         {isLoading ? (
           <>
             <Spinner size="sm" className="mr-2"/>
-            Resetting...
+            Сброс...
           </>
         ) : (
-          'Reset Password'
+          'Сбросить пароль'
         )}
       </Button>
     </Field>

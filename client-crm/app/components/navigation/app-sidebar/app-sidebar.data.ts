@@ -22,74 +22,74 @@ import { AppSidebarConfig } from "./app-sidebar.types"
  * Contains navigation structure and user information
  */
 export const appSidebarData: AppSidebarConfig = {
-  brandName: "Cleaners CRM",
+  brandName: "Клінерсі CRM",
   brandIcon: IconInnerShadowTop,
   navMain: [
 
     {
-      title: "Chat",
+      title: "Чат",
       url: "/chat",
       icon: IconMessage,
     },
     {
-      title: "Calendar",
+      title: "Календарь",
       url: "/calendar",
       icon: IconCalendarEvent,
     },
     {
-      title: "Quotes",
+      title: "Котировки",
       url: "/quotes",
       icon: IconCurrencyDollar,
     },
     {
-      title: "Orders",
+      title: "Заказы",
       url: "/orders",
       icon: IconClipboardList,
     },
     {
-      title: "Users",
+      title: "Пользователи",
       url: "/users",
       icon: IconUsers,
     },
     {
-      title: "Company Team",
+      title: "Команда компании",
       url: "/company-team",
       icon: IconBriefcase,
     },
     {
-      title: "Money Flow",
+      title: "Движение денег",
       url: "/money-flow",
       icon: IconCash,
     },
     {
-      title: "Clients",
+      title: "Клиенты",
       url: "/clients",
       icon: IconAddressBook,
     },
     {
-      title: "My Cleaning Day",
+      title: "Мой день уборки",
       url: "/my-cleaning-day",
       icon: IconSparkles,
     },
     {
-      title: "Pricing",
+      title: "Ценообразование",
       url: "/pricing",
       icon: IconMoneybag,
     },
   ],
   navSecondary: [
     {
-      title: "Settings",
+      title: "Настройки",
       url: "/settings",
       icon: IconSettings,
     },
     {
-      title: "Role Management",
+      title: "Управление ролями",
       url: "/role-management",
       icon: IconShield,
     },
     {
-      title: "Search",
+      title: "Поиск",
       url: "/search",
       icon: IconSearch,
     },

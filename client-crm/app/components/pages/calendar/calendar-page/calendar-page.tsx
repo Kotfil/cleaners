@@ -9,7 +9,7 @@ export const CalendarPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <TypographyH1 className="text-2xl font-bold text-left">Calendar</TypographyH1>
+        <TypographyH1 className="text-2xl font-bold text-left">Календарь</TypographyH1>
         <TypographyMuted className="mt-1">
           Manage your schedule and appointments
         </TypographyMuted>

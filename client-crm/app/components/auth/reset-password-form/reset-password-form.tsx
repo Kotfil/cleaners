@@ -32,7 +32,7 @@ export function ResetPasswordForm({
         
         // Redirect if no token
         if (!token) {
-            router.push('/forgot?error=Invalid reset link');
+            router.push('/forgot?error=Неверная ссылка для сброса');
         }
     }, [dispatch, router, token]);
 
@@ -48,14 +48,14 @@ export function ResetPasswordForm({
                 confirmPassword: values.confirmPassword,
             })).unwrap();
             // Show success toast
-            toast.success('Password changed');
+            toast.success('Пароль изменен');
             // Redirect to login
             router.push('/login');
         } catch (error: any) {
             // Handle server password validation errors
             console.error('Reset password error:', error);
             
-            let errorMessage = error?.message || 'Failed to reset password';
+            let errorMessage = error?.message || 'Не удалось сбросить пароль';
             
             // Check if server returned password-specific validation errors
             if (error?.errors && Array.isArray(error.errors)) {
@@ -89,15 +89,15 @@ export function ResetPasswordForm({
                              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-2 self-start"
                          >
                              <ArrowLeft className="h-4 w-4" />
-                             <span>Back to login</span>
+                             <span>Вернуться к входу</span>
                          </Link>
                          <ResetPasswordFormTitle />
 
                          <ResetPasswordFormPassword 
                              isLoading={isLoading}
                              name="password"
-                             label="New Password"
-                             placeholder="Enter new password"
+                            label="Новый пароль"
+                            placeholder="Введите новый пароль"
                              errorMessage={errors.password}
                              isTouched={touched.password}
                              passwordValue={values.password}
@@ -108,8 +108,8 @@ export function ResetPasswordForm({
                          <ResetPasswordFormPassword 
                              isLoading={isLoading}
                              name="confirmPassword"
-                             label="Confirm Password"
-                             placeholder="Confirm new password"
+                            label="Подтвердите пароль"
+                            placeholder="Подтвердите новый пароль"
                              errorMessage={errors.confirmPassword}
                              isTouched={touched.confirmPassword}
                          />

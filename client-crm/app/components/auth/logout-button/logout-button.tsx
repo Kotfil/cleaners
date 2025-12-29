@@ -40,10 +40,10 @@ export const LogoutButton = ({ className, children }: LogoutButtonProps) => {
       {isLoggingOut ? (
         <>
           <Spinner size="sm" className="mr-2" />
-          Logging out...
+          Выход...
         </>
       ) : (
-        children || 'Logout'
+        children || 'Выйти'
       )}
     </Button>
   );

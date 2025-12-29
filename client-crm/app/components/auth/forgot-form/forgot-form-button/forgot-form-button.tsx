@@ -10,10 +10,10 @@ export function ForgotFormButton({ isLoading }: ForgotFormButtonProps) {
         {isLoading ? (
           <>
             <Spinner size="sm" className="mr-2"/>
-            Sending...
+            Отправка...
           </>
         ) : (
-          'Send reset link'
+          'Отправить ссылку для сброса'
         )}
       </Button>
     </Field>

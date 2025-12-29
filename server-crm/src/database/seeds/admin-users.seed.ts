@@ -11,11 +11,10 @@ import { UserStatus } from '../../enums/user-status.enum';
    * 
    * ⚠️ ЕДИНСТВЕННЫЙ способ создать/обновить admin аккаунты в БД
    * 
-   * Создает/обновляет 3 admin пользователя + 15 mock admins:
-   * - jc@crm.com / 222222@A
-   * - vitaly@crm.com / 222222@A
-   * - test2@test.test / 222222@A
-   * - mock admins: MockAdmin123!
+   * Создает/обновляет 3 admin пользователя:
+   * - filippkotenko@outlook.com / 222222@A
+   * - syslik@gmail.com / 222222@A
+   * - sanechka@gmail.com / 222222@A
    * 
    * Run: yarn seed:admin-users
    * 
@@ -56,34 +55,20 @@ export async function seedAdminUsers(dataSource: DataSource): Promise<void> {
 
   const adminUserDefinitions: AdminUserDefinition[] = [
     {
-      email: 'jc@crm.com',
+      email: 'filippkotenko@outlook.com',
       password: '222222@A',
-      name: 'JC Owner',
+      name: 'Filipp Kotenko',
     },
     {
-      email: 'vitaly@crm.com',
+      email: 'syslik@gmail.com',
       password: '222222@A',
-      name: 'Vitaly Admin',
+      name: 'Syslik',
     },
     {
-      email: 'test2@test.test',
+      email: 'sanechka@gmail.com',
       password: '222222@A',
-      name: 'Test User',
+      name: 'Sanechka',
     },
-  ];
-
-  const mockAdminCount = 15;
-  const mockAdminPassword = 'MockAdmin123!';
-  const firstNames = [
-    'Alex', 'Sam', 'Kate', 'Olivia', 'Henry', 'Grace', 'Ethan', 'Mia', 'Leo', 'Sophia',
-    'Liam', 'Ava', 'Noah', 'Isabella', 'Mason', 'Charlotte', 'Logan', 'Amelia', 'Lucas', 'Harper',
-  ];
-  const lastNames = [
-    'Anderson', 'Bennett', 'Coleman', 'Daniels', 'Edwards', 'Fisher', 'Griffin', 'Harris', 'Iverson', 'Johnson',
-    'Keller', 'Lewis', 'Morris', 'Nelson', 'Owens', 'Parker', 'Quinn', 'Roberts', 'Stevens', 'Turner',
-  ];
-  const domains = [
-    'demo.io', 'mock.dev', 'sample.app', 'playground.cr', 'lab.crm',
   ];
 
   /**
@@ -111,23 +96,6 @@ export async function seedAdminUsers(dataSource: DataSource): Promise<void> {
     return phones;
   }
 
-  const generateMockAdmin = (index: number): AdminUserDefinition => {
-    const first = firstNames[index % firstNames.length];
-    const last = lastNames[Math.floor(Math.random() * lastNames.length)];
-    const name = `${first} ${last}`;
-    const domain = domains[Math.floor(Math.random() * domains.length)];
-    const uniqueSuffix = `${Date.now()}${index}${Math.floor(Math.random() * 1000)}`;
-    const email = `${first.toLowerCase()}.${last.toLowerCase()}.${uniqueSuffix}@${domain}`;
-    return {
-      email,
-      password: mockAdminPassword,
-      name,
-    };
-  };
-
-  const mockAdmins = Array.from({ length: mockAdminCount }, (_, index) => generateMockAdmin(index));
-  adminUserDefinitions.push(...mockAdmins);
-
   const createdUsers: Record<string, User> = {};
 
   for (const userDef of adminUserDefinitions) {
@@ -137,8 +105,8 @@ export async function seedAdminUsers(dataSource: DataSource): Promise<void> {
 
     const hashedPassword = await bcrypt.hash(userDef.password, 12);
     
-    // jc@crm.com получает роль Owner, остальные - Admin
-    const assignedRole = userDef.email === 'jc@crm.com' ? ownerRole : adminRole;
+    // Первый пользователь получает роль Owner, остальные - Admin
+    const assignedRole = userDef.email === 'filippkotenko@outlook.com' ? ownerRole : adminRole;
 
     if (!user) {
       user = userRepository.create({
@@ -189,17 +157,13 @@ export async function seedAdminUsers(dataSource: DataSource): Promise<void> {
 
     createdUsers[userDef.email] = user;
 
-    if (userDef.email.endsWith('@demo.io')) {
-      console.log(`✅ Created mock admin user: ${userDef.email}`);
-    }
   }
 
-  console.log(`\n✅ Created/updated ${Object.keys(createdUsers).length} admin users (including ${mockAdminCount} mock admins)`);
+  console.log(`\n✅ Created/updated ${Object.keys(createdUsers).length} admin users`);
   console.log('\n💡 Default admin users credentials:');
-  console.log('   - jc@crm.com / 222222@A');
-  console.log('   - vitaly@crm.com / 222222@A');
-  console.log('   - test2@test.test / 222222@A');
-  console.log(`\n💡 Mock admin users use password: ${mockAdminPassword}`);
+  console.log('   - filippkotenko@outlook.com / 222222@A');
+  console.log('   - syslik@gmail.com / 222222@A');
+  console.log('   - sanechka@gmail.com / 222222@A');
   console.log('\n🎉 Admin users seed completed!');
 }
 

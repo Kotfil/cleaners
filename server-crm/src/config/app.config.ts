@@ -17,4 +17,14 @@ export const appConfig = {
   cookie: {
     domain: process.env.COOKIE_DOMAIN || undefined,
   },
+  cors: {
+    origins: process.env.CORS_ORIGINS
+      ? process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim())
+      : [
+          'http://localhost:3000',
+          'http://localhost:3001',
+          'https://cleanersin.store',
+          'http://cleanersin.store',
+        ],
+  },
 };

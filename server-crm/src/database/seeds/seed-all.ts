@@ -26,7 +26,7 @@ export async function seedAll(dataSource: DataSource, options?: {
   const {
     clearTables: shouldClearTables = true,
     seedClients: shouldSeedClients = process.env.SEED_CLIENTS !== 'false',
-    clientCount = parseInt(process.env.SEED_CLIENTS_COUNT || '50', 10),
+    clientCount = parseInt(process.env.SEED_CLIENTS_COUNT || '1', 10),
   } = options || {};
 
   // Step 0: Synchronize schema (create tables from entities)
@@ -109,9 +109,9 @@ export async function seedAll(dataSource: DataSource, options?: {
     console.log(`   ✅ Mock clients created (${clientCount} clients)`);
   }
   console.log('\n💡 Admin users credentials:');
-  console.log('   - jc@crm.com / 111111');
-  console.log('   - vitaly@crm.com / 222222');
-  console.log('   - test2@test.test / 111111');
+  console.log('   - filippkotenko@outlook.com / 222222@A');
+  console.log('   - syslik@gmail.com / 222222@A');
+  console.log('   - sanechka@gmail.com / 222222@A');
   console.log('\n✅ Database is ready to use!');
 }
 

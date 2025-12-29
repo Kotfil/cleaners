@@ -1,3 +1,22 @@
+// ⚠️ ВАЖНО: Загружаем .env ПЕРЕД импортом AppDataSource
+import * as dotenv from 'dotenv';
+import { resolve, join } from 'path';
+
+// Загружаем .env файл - пробуем несколько путей
+const envPaths = [
+  join(process.cwd(), '.env'),           // Корень проекта (server-crm/.env)
+  resolve(__dirname, '../../../.env'),   // Относительно src/database/seeds/
+  resolve(__dirname, '../../../../.env'), // На уровень выше
+];
+
+for (const envPath of envPaths) {
+  const result = dotenv.config({ path: envPath });
+  if (!result.error) {
+    break;
+  }
+}
+
+// Теперь импортируем AppDataSource после загрузки .env
 import { DataSource } from 'typeorm';
 import { AppDataSource } from '../../config/data-source';
 import { seedSettings } from './settings.seed';

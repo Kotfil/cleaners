@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cleaners CRM",
+  title: "Клінерсі CRM",
   description: "Cleaners CRM for cleaning services",
   icons: {
     icon: '/favicon.ico',  // ← Добавьте это

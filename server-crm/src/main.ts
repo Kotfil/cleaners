@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import * as dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { resolve } from 'path';
+import { appConfig } from './config/app.config';
 
 // Загружаем .env файл из корня проекта или из server/
 dotenv.config({ path: resolve(__dirname, '../.env') });
@@ -16,12 +17,7 @@ async function bootstrap() {
   
   // Настройка CORS
   app.enableCors({
-    origin: [
-      'http://localhost:3000', // Next.js клиент для разработки
-      'http://localhost:3001', // Fallback для разработки
-      'https://fl-alerter.icu', // Production домен
-      'http://fl-alerter.icu', // HTTP версия для тестирования
-    ],
+    origin: appConfig.cors.origins,
     credentials: true, // Важно для cookies и авторизации
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: [

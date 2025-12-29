@@ -23,7 +23,7 @@ export default function MoneyFlowPage() {
           <div className="@container/main flex flex-1 flex-col gap-2">
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
               <div className="px-4 lg:px-6">
-                <TypographyH1 className="text-2xl font-bold text-left">Money Flow</TypographyH1>
+                <TypographyH1 className="text-2xl font-bold text-left">Движение денег</TypographyH1>
                 <TypographyMuted>Money flow management coming soon...</TypographyMuted>
               </div>
             </div>

@@ -1,9 +1,26 @@
+// ⚠️ ВАЖНО: Загружаем .env ПЕРЕД импортом AppDataSource
+import * as dotenv from 'dotenv';
+import { resolve, join } from 'path';
+
+// Загружаем .env файл - пробуем несколько путей
+const envPaths = [
+  join(process.cwd(), '.env'),           // Корень проекта (server-crm/.env)
+  resolve(__dirname, '../../.env'),      // Относительно src/database/
+  resolve(__dirname, '../../../.env'),    // На уровень выше
+];
+
+for (const envPath of envPaths) {
+  const result = dotenv.config({ path: envPath });
+  if (!result.error) {
+    console.log(`✅ Loaded .env from: ${envPath}`);
+    break;
+  }
+}
+
+// Теперь импортируем AppDataSource после загрузки .env
 import { DataSource } from 'typeorm';
 import { AppDataSource } from '../config/data-source';
 import { seedAll } from './seeds/seed-all';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 /**
  * Run complete seed - очищает и заполняет БД с нуля
@@ -29,7 +46,7 @@ async function runSeedAll() {
       await seedAll(dataSource, {
         clearTables: true,
         seedClients: process.env.SEED_CLIENTS !== 'false',
-        clientCount: parseInt(process.env.SEED_CLIENTS_COUNT || '50', 10),
+        clientCount: parseInt(process.env.SEED_CLIENTS_COUNT || '1', 10),
       });
     }
 

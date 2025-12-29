@@ -1,0 +1,24 @@
+{
+  // Автоматически добавлять все изменения при коммите (git add .)
+  // При включении этой опции, при коммите автоматически добавляются все изменения
+  "git.enableSmartCommit": true,
+  
+  // Отключить подтверждения для более быстрого workflow
+  "git.confirmSync": false,
+  "git.confirmForceSync": false,
+  
+  // Автоматически обнаруживать репозитории
+  "git.autoRepositoryDetection": true,
+  
+  // Настройки для Source Control панели - всегда показывать действия
+  "scm.alwaysShowActions": true,
+  "scm.alwaysShowRepositories": true,
+  
+  // Разрешить force push и no-verify commit для более гибкого workflow
+  "git.allowForcePush": true,
+  "git.allowNoVerifyCommit": true,
+  
+  // Не требовать сообщение коммита (кнопка не будет disabled из-за пустого сообщения)
+  "git.enableCommitSigning": false
+}
+

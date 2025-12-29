@@ -22,7 +22,7 @@ export const ClientsPage: React.FC = memo(() => {
   return (
     <div className="container mx-auto py-1">
       <div className="pb-2">
-        <TypographyH1 className="text-2xl font-bold text-left">Clients</TypographyH1>  
+        <TypographyH1 className="text-2xl font-bold text-left">Клиенты</TypographyH1>  
       </div>
       <OptimizedClientsTable />
     </div>

@@ -11,17 +11,17 @@ export function LoginFormButton({ isLoading }: LoginFormButtonProps) {
         {isLoading ? (
           <>
             <Spinner size="sm" className="mr-2"/>
-            Signing in...
+            Вход...
           </>
         ) : (
-          'Login'
+          'Войти'
         )}
       </Button>
       <Link
         href="/forgot"
         className="text-sm text-center underline-offset-4 hover:underline"
       >
-        Forgot your password?
+        Забыли пароль?
       </Link>
     </Field>
   );

@@ -18,7 +18,7 @@ export const RolesTitle: React.FC<RolesTitleProps> = ({ onSuccess }) => {
     <>
       <div className="flex items-center justify-between">
         <div>
-          <TypographyH1 className="text-2xl font-bold">Role Management</TypographyH1>
+          <TypographyH1 className="text-2xl font-bold">Управление ролями</TypographyH1>
        
         </div>
         {canCreate && (

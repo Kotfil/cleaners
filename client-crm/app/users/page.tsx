@@ -26,7 +26,7 @@ export default function UsersPageRoute() {
           <div className="@container/main flex flex-1 flex-col gap-2">
             <div className="flex flex-col py-4 md:py-6">
               <div className="px-4 lg:px-6 pb-2">
-                <TypographyH1 className="text-2xl font-bold text-left">Users</TypographyH1>
+                <TypographyH1 className="text-2xl font-bold text-left">Пользователи</TypographyH1>
               </div>
               <UsersPage />
             </div>

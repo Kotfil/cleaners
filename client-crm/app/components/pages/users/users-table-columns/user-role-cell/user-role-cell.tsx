@@ -54,7 +54,7 @@ export const UserRoleCell: React.FC<UserRoleCellProps> = memo(({ user }) => {
           key={`${roleName}-${index}`}
           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getRoleColor(roleName)}`}
         >
-          {roleName}
+          {roleName.toLowerCase() === 'owner' ? "'" : roleName}
         </span>
       ))}
     </div>

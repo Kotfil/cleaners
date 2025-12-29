@@ -17,7 +17,7 @@ import { ClientPhone } from '../../entities/client-phone.entity';
  * - Добавляет случайные адреса (street, city, state, zipCode)
  * - Опциональные notes
  */
-export async function seedClients(dataSource: DataSource, count: number = 50): Promise<void> {
+export async function seedClients(dataSource: DataSource, count: number = 1): Promise<void> {
   const clientRepository = dataSource.getRepository(Client);
   const phoneRepository = dataSource.getRepository(ClientPhone);
 
