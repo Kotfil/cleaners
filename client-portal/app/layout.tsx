@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
   description: "Клинеры.io",
   openGraph: {
-    title: "razo",
+    title: "hellow",
     description:
       "Hello Sanechka",
     url: "https://url",
