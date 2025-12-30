@@ -8,21 +8,40 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   // Агрессивные оптимизации для ограниченной памяти
-  productionBrowserSourceMaps: false,
-  swcMinify: true,
+  productionBrowserSourceMaps: false, // Отключить source maps
   
   experimental: {
     workerThreads: false,
-    cpus: 1,
+    cpus: 1, // Только один CPU
+    // Отключить оптимизацию изображений во время сборки
+    optimizePackageImports: [],
   },
   
+  // Отключить генерацию статических страниц во время сборки
+  generateStaticParams: false,
+  
+  // Оптимизация webpack для экономии памяти
   webpack: (config, { isServer, dev }) => {
+    // Отключить source maps в production
     if (!dev) {
       config.devtool = false;
     }
     
+    // Ограничить параллелизм
     config.parallelism = 1;
     
+    // Уменьшить размер кэша в памяти
+    config.cache = {
+      type: 'filesystem',
+      maxMemoryGenerations: 1,
+      maxAge: 1000 * 60 * 5, // 5 минут
+      compression: 'gzip',
+      buildDependencies: {
+        config: [__filename],
+      },
+    };
+    
+    // Оптимизация для клиентской сборки
     if (!isServer) {
       config.optimization = {
         ...config.optimization,
@@ -33,12 +52,13 @@ const nextConfig: NextConfig = {
               ...plugin,
               options: {
                 ...plugin.options,
-                parallel: false,
+                parallel: false, // Отключить параллельную минификацию
                 terserOptions: {
                   ...plugin.options?.terserOptions,
                   compress: {
                     ...plugin.options?.terserOptions?.compress,
-                    passes: 1,
+                    passes: 1, // Уменьшить количество проходов
+                    drop_console: false, // Не удалять console для экономии памяти
                   },
                 },
               },
@@ -48,8 +68,11 @@ const nextConfig: NextConfig = {
         }),
       };
       
+      // Ограничить размер чанков
       config.optimization.splitChunks = {
         chunks: 'all',
+        maxInitialRequests: 10,
+        maxAsyncRequests: 10,
         cacheGroups: {
           default: {
             minChunks: 1,
@@ -61,23 +84,33 @@ const nextConfig: NextConfig = {
             name: 'vendors',
             priority: -10,
             chunks: 'all',
-            maxSize: 200000,
+            maxSize: 150000, // Уменьшить размер чанков
+            minSize: 10000,
           },
         },
       };
     }
     
-    config.cache = {
-      type: 'filesystem',
-      maxMemoryGenerations: 1,
-      maxAge: 1000 * 60 * 5,
+    // Ограничить размер модулей в памяти
+    config.performance = {
+      hints: false,
+      maxEntrypointSize: 512000,
+      maxAssetSize: 512000,
     };
     
     return config;
   },
   
+  // Отключить генерацию статических страниц во время сборки
   output: 'standalone',
-  compress: true,
+  
+  // Отключить компрессию во время сборки (можно включить на сервере)
+  compress: false,
+  
+  // Отключить оптимизацию изображений
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
