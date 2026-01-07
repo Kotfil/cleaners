@@ -1,47 +1,52 @@
 import type { NextConfig } from "next";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+// ИСПРАВЛЕНИЕ: Используем уникальные имена переменных, чтобы избежать конфликта
+// с системными переменными __filename и __dirname, которые уже существуют при сборке.
+const configFilename = fileURLToPath(import.meta.url);
+const configDirname = dirname(configFilename);
 
 const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+
   // Агрессивные оптимизации для ограниченной памяти
-  productionBrowserSourceMaps: false, // Отключить source maps
-  
+  productionBrowserSourceMaps: false,
+
   experimental: {
     workerThreads: false,
     cpus: 1, // Только один CPU
-    // Отключить оптимизацию изображений во время сборки
     optimizePackageImports: [],
   },
-  
-  // Отключить генерацию статических страниц во время сборки
-  generateStaticParams: false,
-  
+
+  output: 'standalone',
+  compress: false,
+
+  images: {
+    unoptimized: true,
+  },
+
   // Оптимизация webpack для экономии памяти
   webpack: (config, { isServer, dev }) => {
-    // Отключить source maps в production
     if (!dev) {
       config.devtool = false;
     }
-    
-    // Ограничить параллелизм
+
     config.parallelism = 1;
-    
-    // Уменьшить размер кэша в памяти
+
     config.cache = {
       type: 'filesystem',
       maxMemoryGenerations: 1,
-      maxAge: 1000 * 60 * 5, // 5 минут
+      maxAge: 1000 * 60 * 5,
       compression: 'gzip',
       buildDependencies: {
-        config: [__filename],
+        // ВАЖНО: Тут используем нашу переименованную переменную
+        config: [configFilename],
       },
     };
-    
-    // Оптимизация для клиентской сборки
+
     if (!isServer) {
       config.optimization = {
         ...config.optimization,
@@ -52,13 +57,13 @@ const nextConfig: NextConfig = {
               ...plugin,
               options: {
                 ...plugin.options,
-                parallel: false, // Отключить параллельную минификацию
+                parallel: false,
                 terserOptions: {
                   ...plugin.options?.terserOptions,
                   compress: {
                     ...plugin.options?.terserOptions?.compress,
-                    passes: 1, // Уменьшить количество проходов
-                    drop_console: false, // Не удалять console для экономии памяти
+                    passes: 1,
+                    drop_console: false,
                   },
                 },
               },
@@ -67,8 +72,7 @@ const nextConfig: NextConfig = {
           return plugin;
         }),
       };
-      
-      // Ограничить размер чанков
+
       config.optimization.splitChunks = {
         chunks: 'all',
         maxInitialRequests: 10,
@@ -84,32 +88,20 @@ const nextConfig: NextConfig = {
             name: 'vendors',
             priority: -10,
             chunks: 'all',
-            maxSize: 150000, // Уменьшить размер чанков
+            maxSize: 150000,
             minSize: 10000,
           },
         },
       };
     }
-    
-    // Ограничить размер модулей в памяти
+
     config.performance = {
       hints: false,
       maxEntrypointSize: 512000,
       maxAssetSize: 512000,
     };
-    
+
     return config;
-  },
-  
-  // Отключить генерацию статических страниц во время сборки
-  output: 'standalone',
-  
-  // Отключить компрессию во время сборки (можно включить на сервере)
-  compress: false,
-  
-  // Отключить оптимизацию изображений
-  images: {
-    unoptimized: true,
   },
 };
 
