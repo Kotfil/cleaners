@@ -7,7 +7,7 @@ module.exports = {
             args: 'start',
             env: {
                 NODE_ENV: 'production',
-                PORT: 3007,
+                PORT: 3006,
                 NODE_OPTIONS: '--max-old-space-size=128'
             },
             instances: 1,
@@ -26,7 +26,7 @@ module.exports = {
             args: 'run start:prod',
             env_file: '/cleaners/server-crm/.env',
             env: {
-                PORT: 3008, // Установили порт 3007
+                PORT: 3007,
                 NODE_OPTIONS: '--max-old-space-size=180'
             },
             instances: 1,
