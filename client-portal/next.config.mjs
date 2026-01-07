@@ -1,3 +1,10 @@
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Создаем переменные, которых нет в ES модулях (.mjs)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -8,27 +15,26 @@ const nextConfig = {
   },
   // Агрессивные оптимизации для ограниченной памяти
   productionBrowserSourceMaps: false, // Отключить source maps
-  
+
   experimental: {
     workerThreads: false,
     cpus: 1, // Только один CPU
     // Отключить оптимизацию изображений во время сборки
     optimizePackageImports: [],
   },
-  
-  // Отключить генерацию статических страниц во время сборки
-  generateStaticParams: false,
-  
+
+  // УДАЛЕНО: generateStaticParams: false (эта строка вызывала ошибку)
+
   // Оптимизация webpack для экономии памяти
   webpack: (config, { isServer, dev }) => {
     // Отключить source maps в production
     if (!dev) {
       config.devtool = false;
     }
-    
+
     // Ограничить параллелизм
     config.parallelism = 1;
-    
+
     // Уменьшить размер кэша в памяти
     config.cache = {
       type: 'filesystem',
@@ -36,10 +42,10 @@ const nextConfig = {
       maxAge: 1000 * 60 * 5, // 5 минут
       compression: 'gzip',
       buildDependencies: {
-        config: [__filename],
+        config: [__filename], // Теперь эта переменная работает
       },
     };
-    
+
     // Оптимизация для клиентской сборки
     if (!isServer) {
       config.optimization = {
@@ -66,7 +72,7 @@ const nextConfig = {
           return plugin;
         }),
       };
-      
+
       // Ограничить размер чанков
       config.optimization.splitChunks = {
         chunks: 'all',
@@ -89,23 +95,23 @@ const nextConfig = {
         },
       };
     }
-    
+
     // Ограничить размер модулей в памяти
     config.performance = {
       hints: false,
       maxEntrypointSize: 512000,
       maxAssetSize: 512000,
     };
-    
+
     return config;
   },
-  
+
   // Отключить генерацию статических страниц во время сборки
   output: 'standalone',
-  
+
   // Отключить компрессию во время сборки (можно включить на сервере)
   compress: false,
-  
+
   // Отключить оптимизацию изображений
   images: {
     unoptimized: true,
