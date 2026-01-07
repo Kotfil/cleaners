@@ -7,7 +7,7 @@ module.exports = {
       args: 'start',
       env: {
         NODE_ENV: 'production',
-        PORT: 3000, // Был 3006
+        PORT: 3006,
         NODE_OPTIONS: '--max-old-space-size=128'
       },
       instances: 1,
@@ -19,32 +19,13 @@ module.exports = {
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
     },
     {
-      name: 'server-crm',
-      cwd: '/cleaners/server-crm',
-      script: 'npm',
-      args: 'run start:prod',
-      env_file: '/cleaners/server-crm/.env',
-      env: {
-        NODE_ENV: 'production',
-        PORT: 3001, // Явно задаем порт
-        NODE_OPTIONS: '--max-old-space-size=180'
-      },
-      instances: 1,
-      exec_mode: 'fork',
-      watch: false,
-      max_memory_restart: '200M',
-      error_file: '/root/.pm2/logs/server-crm-error.log',
-      out_file: '/root/.pm2/logs/server-crm-out.log',
-      log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
-    },
-    {
       name: 'client-portal',
       cwd: '/cleaners/client-portal',
       script: 'npm',
       args: 'start',
       env: {
         NODE_ENV: 'production',
-        PORT: 3002, // Был 3009
+        PORT: 3009,
         NODE_OPTIONS: '--max-old-space-size=128'
       },
       instances: 1,
@@ -56,14 +37,31 @@ module.exports = {
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
     },
     {
+      name: 'server-crm',
+      cwd: '/cleaners/server-crm',
+      script: 'npm',
+      args: 'run start:prod',
+      env_file: '/cleaners/server-crm/.env',
+      env: {
+        PORT: 3007, // Установили порт 3007
+        NODE_OPTIONS: '--max-old-space-size=180'
+      },
+      instances: 1,
+      exec_mode: 'fork',
+      watch: false,
+      max_memory_restart: '200M',
+      error_file: '/root/.pm2/logs/server-crm-error.log',
+      out_file: '/root/.pm2/logs/server-crm-out.log',
+      log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
+    },
+    {
       name: 'server-client-portal',
       cwd: '/cleaners/server-client-portal',
       script: 'npm',
       args: 'run start:prod',
       env_file: '/cleaners/server-client-portal/.env',
       env: {
-        NODE_ENV: 'production',
-        PORT: 3003, // Явно задаем порт
+        PORT: 3008, // Установили порт 3008
         NODE_OPTIONS: '--max-old-space-size=180'
       },
       instances: 1,
