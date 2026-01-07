@@ -24,8 +24,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Local env files
+# Environment files (Ignored in all subdirectories)
 .env
+.env.production
 .env*.local
 
 # IDE
