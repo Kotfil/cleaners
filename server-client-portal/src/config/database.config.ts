@@ -14,9 +14,9 @@ export const databaseConfig = (configService: ConfigService): TypeOrmModuleOptio
   type: 'postgres',
   host: configService.get<string>('DB_HOST', 'localhost'),
   port: configService.get<number>('DB_PORT', 5432),
-  username: configService.get<string>('DB_USERNAME', 'cleaners'),
-  password: configService.get<string>('DB_PASSWORD', 'cleaners'),
-  database: configService.get<string>('DB_DATABASE', 'cleaners'),
+  username: configService.get<string>('DB_USERNAME', ''),
+  password: configService.get<string>('DB_PASSWORD', ''),
+  database: configService.get<string>('DB_DATABASE', ''),
   entities: [User, UserPhone, PermissionEntity, Role, RolePermission],
   synchronize: false, // Disabled - use migrations from server-crm
   logging: configService.get<string>('NODE_ENV') === 'development',
