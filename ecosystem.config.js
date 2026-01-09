@@ -2,7 +2,7 @@ module.exports = {
     apps: [
         {
             name: 'client-crm',
-            cwd: '/cleaners/client-crm',
+            cwd: '/home/kotfil/cleaners/client-crm', // Поправил путь
             script: 'npm',
             args: 'start',
             env: {
@@ -12,34 +12,28 @@ module.exports = {
             },
             instances: 1,
             exec_mode: 'fork',
-            watch: false,
             max_memory_restart: '150M',
-            error_file: '/root/.pm2/logs/client-crm-error.log',
-            out_file: '/root/.pm2/logs/client-crm-out.log',
+            // Убрали жесткие пути к /root/, теперь логи будут в ~/.pm2/logs/
             log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
         },
-
         {
             name: 'server-crm',
-            cwd: '/cleaners/server-crm',
+            cwd: '/home/kotfil/cleaners/server-crm',
             script: 'npm',
             args: 'run start:prod',
-            env_file: '/cleaners/server-crm/.env',
+            env_file: '/home/kotfil/cleaners/server-crm/.env',
             env: {
                 PORT: 3007,
                 NODE_OPTIONS: '--max-old-space-size=180'
             },
             instances: 1,
             exec_mode: 'fork',
-            watch: false,
             max_memory_restart: '200M',
-            error_file: '/root/.pm2/logs/server-crm-error.log',
-            out_file: '/root/.pm2/logs/server-crm-out.log',
             log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
         },
         {
             name: 'client-portal',
-            cwd: '/cleaners/client-portal',
+            cwd: '/home/kotfil/cleaners/client-portal',
             script: 'npm',
             args: 'start',
             env: {
@@ -49,28 +43,22 @@ module.exports = {
             },
             instances: 1,
             exec_mode: 'fork',
-            watch: false,
             max_memory_restart: '150M',
-            error_file: '/root/.pm2/logs/client-portal-error.log',
-            out_file: '/root/.pm2/logs/client-portal-out.log',
             log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
         },
         {
             name: 'server-client-portal',
-            cwd: '/cleaners/server-client-portal',
+            cwd: '/home/kotfil/cleaners/server-client-portal',
             script: 'npm',
             args: 'run start:prod',
-            env_file: '/cleaners/server-client-portal/.env',
+            env_file: '/home/kotfil/cleaners/server-client-portal/.env',
             env: {
-                PORT: 3008, // Установили порт 3008
+                PORT: 3008,
                 NODE_OPTIONS: '--max-old-space-size=180'
             },
             instances: 1,
             exec_mode: 'fork',
-            watch: false,
             max_memory_restart: '200M',
-            error_file: '/root/.pm2/logs/server-client-portal-error.log',
-            out_file: '/root/.pm2/logs/server-client-portal-out.log',
             log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
         }
     ]
